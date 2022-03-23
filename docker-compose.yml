@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  database_adopet: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
+  database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
     image: postgres
     container_name: database_adopet
     restart: always
@@ -9,7 +9,7 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_USER=bigarelli
-      - POSTGRES_PASSWORD=bigarelli
+      - POSTGRES_PASSWORD=biga
       - POSTGRES_DB=adopet
     volumes:
       - pgdata:/data/postgres

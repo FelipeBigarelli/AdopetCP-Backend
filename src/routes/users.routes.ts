@@ -1,25 +1,22 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import uploadConfig from '../config/upload';
-import { createUserController } from '../modules/users/useCases/createUser';
-import { importUserAvatarController } from '../modules/users/useCases/importUserAvatar';
-import { listUsersController } from '../modules/users/useCases/listUsers';
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { CreateUserController } from '../modules/users/useCases/createUser/CreateUserController';
+import { ListUsersController } from '../modules/users/useCases/listUsers/ListUsersController';
+import { UpdateUserAvatarController } from '../modules/users/useCases/updateUserAvatar/UpdateUserAvatarController';
 
 const usersRoutes = Router();
-const upload = multer(uploadConfig);
 
-usersRoutes.post('/', (request, response) => {
-  return createUserController.handle(request, response);
-});
+const updateUserAvatarController = new UpdateUserAvatarController();
 
-usersRoutes.get('/', (request, response) => {
-  return listUsersController.handle(request, response);
-});
+const createUserController = new CreateUserController();
+const listUsersController = new ListUsersController();
 
-usersRoutes.patch('/avatar', upload.single('avatar'), (request, response) => {
-  console.log(request.file);
-  return importUserAvatarController.handle(request, response);
-});
+usersRoutes.get('/', ensureAuthenticated, listUsersController.handle);
+
+usersRoutes.post('/', createUserController.handle);
+
+usersRoutes.patch('/avatar', updateUserAvatarController.handle);
 
 export { usersRoutes };
