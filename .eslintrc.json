@@ -24,6 +24,7 @@
         "camelcase": "off",
         "import/no-unresolved": "error",
         "prettier/prettier": "error",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -53,7 +54,7 @@
             "warn",
             {
                 "newlinesBetween": "always",
-                "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+                "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
                 "alphabetize": { "order": "asc", "ignoreCase": true }
             }
         ],
