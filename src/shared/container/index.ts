@@ -5,6 +5,8 @@ import { UsersTokensRepository } from '@modules/users/infra/typeorm/repositories
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 import { IUsersTokensRepository } from '@modules/users/repositories/IUsersTokensRepository';
 
+import '@shared/container/providers/DateProvider';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository
