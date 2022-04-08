@@ -23,6 +23,7 @@ class PostsRepository implements IPostsRepository {
     street,
     house_number,
     id,
+    user_id,
   }: ICreatePostDTO): Promise<void> {
     const post = this.repository.create({
       title,
@@ -35,6 +36,7 @@ class PostsRepository implements IPostsRepository {
       street,
       house_number,
       id,
+      user_id,
     });
 
     await this.repository.save(post);
@@ -44,6 +46,18 @@ class PostsRepository implements IPostsRepository {
     const posts = await this.repository.find();
 
     return posts;
+  }
+
+  async delete(id: string): Promise<void> {
+    const post = await this.repository.findOne(id);
+
+    await this.repository.delete(post.id);
+  }
+
+  async listUserPosts(user_id: string): Promise<Post[]> {
+    const userPosts = await this.repository.find({ where: { user_id } });
+
+    return userPosts;
   }
 }
 

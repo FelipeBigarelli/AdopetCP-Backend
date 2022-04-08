@@ -5,13 +5,16 @@ import express, { NextFunction, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import 'express-async-errors';
 
-import '@shared/infra/typeorm';
 import '@shared/container';
+
 import upload from '@config/upload';
 import { AppError } from '@shared/errors/AppError';
 import { router } from '@shared/infra/http/routes';
+import createConnection from '@shared/infra/typeorm';
 
 import swaggerFile from '../../../swagger.json';
+
+createConnection();
 
 const app = express();
 const port = 3333;

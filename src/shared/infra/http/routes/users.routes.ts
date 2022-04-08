@@ -7,6 +7,7 @@ import { ProfileUserController } from '@modules/users/useCases/profileUser/Profi
 import { UpdateUserAvatarController } from '@modules/users/useCases/updateUserAvatar/UpdateUserAvatarController';
 
 import uploadConfig from '../../../../config/upload';
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const usersRoutes = Router();
@@ -18,7 +19,12 @@ const listUsersController = new ListUsersController();
 const updateUserAvatarController = new UpdateUserAvatarController();
 const profileUserController = new ProfileUserController();
 
-usersRoutes.get('/', ensureAuthenticated, listUsersController.handle);
+usersRoutes.get(
+  '/',
+  ensureAuthenticated,
+  ensureAdmin,
+  listUsersController.handle
+);
 
 usersRoutes.post('/', createUserController.handle);
 

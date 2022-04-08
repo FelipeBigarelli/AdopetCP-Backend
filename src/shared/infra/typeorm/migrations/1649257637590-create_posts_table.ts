@@ -26,11 +26,12 @@ export class createPostsTable1649257637590 implements MigrationInterface {
           },
           {
             name: 'phone_number',
-            type: 'int',
+            type: 'varchar',
+            length: '11',
           },
           {
             name: 'cep',
-            type: 'int',
+            type: 'varchar',
           },
           {
             name: 'city',

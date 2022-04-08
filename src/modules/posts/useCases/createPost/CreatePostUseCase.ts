@@ -20,6 +20,7 @@ class CreatePostUseCase {
     district,
     street,
     house_number,
+    user_id,
   }: ICreatePostDTO): Promise<void> {
     await this.postsRepository.create({
       title,
@@ -31,6 +32,7 @@ class CreatePostUseCase {
       district,
       street,
       house_number,
+      user_id,
     });
   }
 }

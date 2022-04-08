@@ -17,6 +17,8 @@ class CreatePostController {
       house_number,
     } = request.body;
 
+    const userId = request.user.id;
+
     const createPostUseCase = container.resolve(CreatePostUseCase);
 
     await createPostUseCase.execute({
@@ -29,6 +31,7 @@ class CreatePostController {
       district,
       street,
       house_number,
+      user_id: userId,
     });
 
     return response.status(201).send();

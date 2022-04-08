@@ -3,10 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+
+import { User } from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('posts')
 class Post {
@@ -26,7 +29,7 @@ class Post {
   phone_number: number;
 
   @Column()
-  cep: number;
+  cep: string;
 
   @Column()
   city: string;
@@ -42,6 +45,13 @@ class Post {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Expose({ name: 'photo_url' })
   photo_url(): string {
