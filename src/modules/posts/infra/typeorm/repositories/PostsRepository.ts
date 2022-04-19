@@ -24,6 +24,7 @@ class PostsRepository implements IPostsRepository {
     house_number,
     id,
     user_id,
+    category_name,
   }: ICreatePostDTO): Promise<void> {
     const post = this.repository.create({
       title,
@@ -37,6 +38,7 @@ class PostsRepository implements IPostsRepository {
       house_number,
       id,
       user_id,
+      category_name,
     });
 
     await this.repository.save(post);

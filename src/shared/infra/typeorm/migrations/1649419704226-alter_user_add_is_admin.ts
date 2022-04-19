@@ -13,6 +13,6 @@ export class alterUserAddIsAdmin1649419704226 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropColumn('users', 'isAdmin');
+    await queryRunner.dropColumn('users', 'is_admin');
   }
 }

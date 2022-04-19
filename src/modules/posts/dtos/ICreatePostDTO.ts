@@ -10,6 +10,7 @@ interface ICreatePostDTO {
   district: string;
   street: string;
   house_number: string;
+  category_name: string;
 }
 
 export { ICreatePostDTO };

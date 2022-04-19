@@ -15,6 +15,7 @@ class CreatePostController {
       district,
       street,
       house_number,
+      category_name,
     } = request.body;
 
     const userId = request.user.id;
@@ -31,6 +32,7 @@ class CreatePostController {
       district,
       street,
       house_number,
+      category_name,
       user_id: userId,
     });
 

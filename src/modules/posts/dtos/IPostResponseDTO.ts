@@ -9,6 +9,7 @@ interface IPostResponseDTO {
   district: string;
   street: string;
   house_number: string;
+  category_name: string;
   photo_url(): string;
 }
 
