@@ -48,8 +48,14 @@ class PostsRepository implements IPostsRepository {
     return posts;
   }
 
-  async delete(id: string): Promise<void> {
+  async deleteAdmin(id: string): Promise<void> {
     const post = await this.repository.findOne(id);
+
+    await this.repository.delete(post.id);
+  }
+
+  async delete(id: string, user_id: string): Promise<void> {
+    const post = await this.repository.findOne({ where: { id, user_id } });
 
     await this.repository.delete(post.id);
   }
@@ -58,6 +64,28 @@ class PostsRepository implements IPostsRepository {
     const userPosts = await this.repository.find({ where: { user_id } });
 
     return userPosts;
+  }
+
+  async editPost(data: ICreatePostDTO): Promise<void> {
+    const { id } = data;
+    let userPost = await this.repository.findOne({ where: { id } });
+
+    userPost = this.repository.create({
+      id: userPost.id,
+      ...data,
+    });
+
+    await this.repository.save(userPost);
+  }
+
+  async searchLastPosts(): Promise<Post[]> {
+    const lastPosts = await this.repository
+      .createQueryBuilder('posts')
+      .take(10)
+      .orderBy('posts.created_at', 'DESC')
+      .getMany();
+
+    return lastPosts;
   }
 }
 

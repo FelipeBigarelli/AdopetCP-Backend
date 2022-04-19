@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 
+import { DeleteUserPostController } from '@modules/posts/useCases/deleteUserPost/DeleteUserPostController';
 import { CreateUserController } from '@modules/users/useCases/createUser/CreateUserController';
 import { ListUsersController } from '@modules/users/useCases/listUsers/ListUsersController';
 import { ProfileUserController } from '@modules/users/useCases/profileUser/ProfileUserController';
@@ -18,6 +19,7 @@ const createUserController = new CreateUserController();
 const listUsersController = new ListUsersController();
 const updateUserAvatarController = new UpdateUserAvatarController();
 const profileUserController = new ProfileUserController();
+const deleteUserPosts = new DeleteUserPostController();
 
 usersRoutes.get(
   '/',
@@ -27,6 +29,8 @@ usersRoutes.get(
 );
 
 usersRoutes.post('/', createUserController.handle);
+
+usersRoutes.delete('/post/:id', ensureAuthenticated, deleteUserPosts.handle);
 
 usersRoutes.patch(
   '/avatar',
