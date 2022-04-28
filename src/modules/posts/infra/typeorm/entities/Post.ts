@@ -1,4 +1,3 @@
-import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -23,9 +22,6 @@ class Post {
 
   @Column()
   description: string;
-
-  @Column()
-  photo: string;
 
   @Column()
   phone_number: number;
@@ -61,18 +57,6 @@ class Post {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
-
-  @Expose({ name: 'photo_url' })
-  photo_url(): string {
-    switch (process.env.disk) {
-      case 'local':
-        return `${process.env.APP_API_URL}/photo/${this.photo}`;
-      case 's3':
-        return `${process.env.AWS_BUCKET_URL}/photo/${this.photo}`;
-      default:
-        return null;
-    }
-  }
 
   constructor() {
     if (!this.id) {

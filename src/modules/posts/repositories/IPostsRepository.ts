@@ -1,5 +1,3 @@
-import { Category } from '@modules/categories/infra/typeorm/entities/Category';
-
 import { ICreatePostDTO } from '../dtos/ICreatePostDTO';
 import { Post } from '../infra/typeorm/entities/Post';
 

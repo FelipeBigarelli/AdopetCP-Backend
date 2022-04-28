@@ -21,10 +21,6 @@ export class createPostsTable1649257637590 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'photo',
-            type: 'varchar',
-          },
-          {
             name: 'phone_number',
             type: 'varchar',
             length: '11',

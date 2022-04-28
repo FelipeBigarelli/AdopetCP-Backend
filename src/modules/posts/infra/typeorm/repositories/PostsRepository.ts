@@ -15,7 +15,6 @@ class PostsRepository implements IPostsRepository {
   async create({
     title,
     description,
-    photo,
     phone_number,
     cep,
     city,
@@ -29,7 +28,6 @@ class PostsRepository implements IPostsRepository {
     const post = this.repository.create({
       title,
       description,
-      photo,
       phone_number,
       cep,
       city,

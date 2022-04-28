@@ -14,7 +14,6 @@ class EditPostUseCase {
     id,
     title,
     description,
-    photo,
     phone_number,
     cep,
     city,
@@ -22,12 +21,12 @@ class EditPostUseCase {
     street,
     house_number,
     user_id,
+    category_name,
   }: ICreatePostDTO): Promise<void> {
     await this.postsRepository.create({
       id,
       title,
       description,
-      photo,
       phone_number,
       cep,
       city,
@@ -35,6 +34,7 @@ class EditPostUseCase {
       street,
       house_number,
       user_id,
+      category_name,
     });
   }
 }

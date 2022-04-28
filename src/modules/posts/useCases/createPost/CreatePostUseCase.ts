@@ -17,7 +17,6 @@ class CreatePostUseCase {
   async execute({
     title,
     description,
-    photo,
     phone_number,
     cep,
     city,
@@ -38,7 +37,6 @@ class CreatePostUseCase {
     await this.postsRepository.create({
       title,
       description,
-      photo,
       phone_number,
       cep,
       city,

@@ -3,7 +3,6 @@ interface ICreatePostDTO {
   user_id?: string;
   title: string;
   description: string;
-  photo: string;
   phone_number: number;
   cep: string;
   city: string;

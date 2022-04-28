@@ -26,6 +26,12 @@ class PostImagesRepository implements IPostImagesRepository {
 
     return postImage;
   }
+
+  async findById(post_id: string): Promise<PostImages> {
+    const post = await this.repository.findOne(post_id);
+
+    return post;
+  }
 }
 
 export { PostImagesRepository };

@@ -17,6 +17,8 @@ class UploadPostImagesController {
 
     const image_name = images.map((file) => file.filename);
 
+    console.log(image_name);
+
     await uploadPostImagesUseCase.execute({
       user_id,
       post_id,
