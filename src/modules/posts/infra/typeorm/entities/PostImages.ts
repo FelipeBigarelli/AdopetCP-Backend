@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 import { User } from '@modules/users/infra/typeorm/entities/User';
@@ -18,6 +25,9 @@ class PostImages {
 
   @Column()
   user_id: string;
+
+  @CreateDateColumn()
+  created_at: Date;
 
   @ManyToOne(() => Post)
   @JoinColumn({ name: 'post_id' })
