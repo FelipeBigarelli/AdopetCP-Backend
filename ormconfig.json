@@ -2,23 +2,14 @@
   {
     "type": "postgres",
     "port": 5432,
-    "host": "localhost", 
+    "host": "localhost",
     "username": "bigarelli",
     "password": "biga",
-    "database": "adopet", 
+    "database": "adopet",
     "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
     "entities": ["./src/modules/**/entities/*.ts"],
     "cli": {
       "migrationsDir": "./src/shared/infra/typeorm/migrations"
     }
-  },
-  {
-    "name": "mongo",
-    "type": "mongo",
-    "port": 27017,
-    "host": "localhost", 
-    "database": "adopet_mongodb",
-    "useUnifiedTopology": true,
-    "entities": ["./src/modules/**/infra/typeorm/schemas/*.ts"]
   }
 ]
