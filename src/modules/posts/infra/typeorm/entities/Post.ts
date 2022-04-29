@@ -4,6 +4,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
@@ -11,6 +12,8 @@ import { v4 as uuid } from 'uuid';
 
 import { Category } from '@modules/categories/infra/typeorm/entities/Category';
 import { User } from '@modules/users/infra/typeorm/entities/User';
+
+import { PostImages } from './PostImages';
 
 @Entity('posts')
 class Post {
@@ -49,6 +52,9 @@ class Post {
 
   @Column()
   category_name: string;
+
+  @OneToMany(() => PostImages, (postImages) => postImages.post, { eager: true })
+  images: PostImages[];
 
   @OneToOne(() => Category)
   @JoinColumn({ name: 'category_name' })

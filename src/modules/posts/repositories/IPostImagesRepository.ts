@@ -7,7 +7,6 @@ interface IPostImagesRepository {
     image_name: string
   ): Promise<PostImages>;
   findById(post_id: string): Promise<PostImages>;
-  findAllById(post_id: string): Promise<PostImages[]>;
 }
 
 export { IPostImagesRepository };

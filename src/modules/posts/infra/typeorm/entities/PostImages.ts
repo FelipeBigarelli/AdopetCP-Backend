@@ -30,7 +30,7 @@ class PostImages {
   @CreateDateColumn()
   created_at: Date;
 
-  @ManyToOne(() => Post)
+  @ManyToOne(() => Post, (post) => post.images)
   @JoinColumn({ name: 'post_id' })
   post: Post;
 
