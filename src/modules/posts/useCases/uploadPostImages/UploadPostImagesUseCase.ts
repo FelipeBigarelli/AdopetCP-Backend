@@ -6,7 +6,7 @@ import { IStorageProvider } from '@shared/container/providers/StorageProvider/IS
 interface IRequest {
   user_id: string;
   post_id: string;
-  image_name: string[];
+  images_name: string[];
 }
 
 @injectable()
@@ -18,17 +18,11 @@ class UploadPostImagesUseCase {
     private storageProvider: IStorageProvider
   ) {}
 
-  async execute({ user_id, post_id, image_name }: IRequest) {
-    const postImages = await this.postImagesRepository.findById(post_id);
-
-    if (postImages.image_name) {
-      await this.storageProvider.delete(postImages.image_name, 'photo');
-    }
-
-    image_name.map(async (image) => {
-      await this.storageProvider.save(image, 'photo');
-
+  async execute({ user_id, post_id, images_name }: IRequest): Promise<void> {
+    images_name.map(async (image) => {
       await this.postImagesRepository.create(user_id, post_id, image);
+
+      await this.storageProvider.save(image, 'photo');
     });
   }
 }

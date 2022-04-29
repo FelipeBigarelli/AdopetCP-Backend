@@ -7,6 +7,7 @@ import { DeleteAdminPostController } from '@modules/posts/useCases/deleteAdminPo
 import { EditPostController } from '@modules/posts/useCases/editPost/EditPostController';
 import { ListAllPostsController } from '@modules/posts/useCases/listAllPosts/ListAllPostsController';
 import { ListLastPostsController } from '@modules/posts/useCases/listLastPosts/ListLastPostsController';
+import { ListPostImagesController } from '@modules/posts/useCases/listPostImages/ListPostImagesController';
 import { ListUserPostsController } from '@modules/posts/useCases/listUserPosts/ListUserPostsController';
 import { UploadPostImagesController } from '@modules/posts/useCases/uploadPostImages/UploadPostImagesController';
 
@@ -21,6 +22,7 @@ const editPostController = new EditPostController();
 const listAllPostsController = new ListAllPostsController();
 const listUserPostsController = new ListUserPostsController();
 const listLastPostsController = new ListLastPostsController();
+const listPostImagesController = new ListPostImagesController();
 const uploadPostImagesController = new UploadPostImagesController();
 
 const upload = multer(uploadConfig);
@@ -34,6 +36,12 @@ postsRoutes.get(
 );
 
 postsRoutes.get('/last', listLastPostsController.handle);
+
+postsRoutes.get(
+  '/:id/images',
+  ensureAuthenticated,
+  listPostImagesController.handle
+);
 
 postsRoutes.put('/edit/:id', ensureAuthenticated, editPostController.handle);
 
