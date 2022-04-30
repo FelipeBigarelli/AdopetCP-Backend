@@ -87,6 +87,12 @@ class PostsRepository implements IPostsRepository {
 
     return lastPosts;
   }
+
+  async findById(id: string): Promise<Post> {
+    const post = await this.repository.findOne(id);
+
+    return post;
+  }
 }
 
 export { PostsRepository };

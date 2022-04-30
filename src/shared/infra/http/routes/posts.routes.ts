@@ -4,6 +4,7 @@ import multer from 'multer';
 import uploadConfig from '@config/upload';
 import { CreatePostController } from '@modules/posts/useCases/createPost/CreatePostController';
 import { DeleteAdminPostController } from '@modules/posts/useCases/deleteAdminPost/DeleteAdminPostController';
+import { DeletePostImagesController } from '@modules/posts/useCases/deletePostImages/DeletePostImagesController';
 import { EditPostController } from '@modules/posts/useCases/editPost/EditPostController';
 import { ListAllPostsController } from '@modules/posts/useCases/listAllPosts/ListAllPostsController';
 import { ListLastPostsController } from '@modules/posts/useCases/listLastPosts/ListLastPostsController';
@@ -22,6 +23,7 @@ const listAllPostsController = new ListAllPostsController();
 const listUserPostsController = new ListUserPostsController();
 const listLastPostsController = new ListLastPostsController();
 const uploadPostImagesController = new UploadPostImagesController();
+const deletePostImagesController = new DeletePostImagesController();
 
 const upload = multer(uploadConfig);
 
@@ -51,6 +53,12 @@ postsRoutes.delete(
   ensureAuthenticated,
   ensureAdmin,
   deleteAdminPostController.handle
+);
+
+postsRoutes.delete(
+  '/:post_id/:id',
+  ensureAuthenticated,
+  deletePostImagesController.handle
 );
 
 export { postsRoutes };

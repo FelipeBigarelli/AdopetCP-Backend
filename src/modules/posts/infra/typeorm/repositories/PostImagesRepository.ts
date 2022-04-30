@@ -27,10 +27,20 @@ class PostImagesRepository implements IPostImagesRepository {
     return postImage;
   }
 
-  async findById(post_id: string): Promise<PostImages> {
-    const post = await this.repository.findOne(post_id);
+  async findById(id: string): Promise<PostImages> {
+    const image = await this.repository.findOne(id);
 
-    return post;
+    console.log(image, 'image');
+
+    return image;
+  }
+
+  async delete(id: string, post_id: string, user_id: string): Promise<void> {
+    const postImage = await this.repository.findOne({
+      where: { id, post_id, user_id },
+    });
+
+    await this.repository.delete(postImage.id);
   }
 }
 
