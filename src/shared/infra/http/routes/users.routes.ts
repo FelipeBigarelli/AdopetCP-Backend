@@ -7,6 +7,7 @@ import { CreateUserController } from '@modules/users/useCases/createUser/CreateU
 import { ListUsersController } from '@modules/users/useCases/listUsers/ListUsersController';
 import { ProfileUserController } from '@modules/users/useCases/profileUser/ProfileUserController';
 import { UpdateUserAvatarController } from '@modules/users/useCases/updateUserAvatar/UpdateUserAvatarController';
+import { UpdateUserProfileController } from '@modules/users/useCases/updateUserProfile/UpdateUserProfileController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
@@ -19,6 +20,7 @@ const createUserController = new CreateUserController();
 const listUsersController = new ListUsersController();
 const updateUserAvatarController = new UpdateUserAvatarController();
 const profileUserController = new ProfileUserController();
+const updateUserProfileController = new UpdateUserProfileController();
 const deleteUserPosts = new DeleteUserPostController();
 
 usersRoutes.get(
@@ -31,6 +33,12 @@ usersRoutes.get(
 usersRoutes.post('/', createUserController.handle);
 
 usersRoutes.delete('/post/:id', ensureAuthenticated, deleteUserPosts.handle);
+
+usersRoutes.put(
+  '/profile',
+  ensureAuthenticated,
+  updateUserProfileController.handle
+);
 
 usersRoutes.patch(
   '/avatar',
