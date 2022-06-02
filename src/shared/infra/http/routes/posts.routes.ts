@@ -9,6 +9,7 @@ import { EditPostController } from '@modules/posts/useCases/editPost/EditPostCon
 import { ListAllPostsController } from '@modules/posts/useCases/listAllPosts/ListAllPostsController';
 import { ListLastPostsController } from '@modules/posts/useCases/listLastPosts/ListLastPostsController';
 import { ListUserPostsController } from '@modules/posts/useCases/listUserPosts/ListUserPostsController';
+import { NotificatePostController } from '@modules/posts/useCases/notificatePost/NotificatePostController';
 import { UploadPostImagesController } from '@modules/posts/useCases/uploadPostImages/UploadPostImagesController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
@@ -24,6 +25,7 @@ const listUserPostsController = new ListUserPostsController();
 const listLastPostsController = new ListLastPostsController();
 const uploadPostImagesController = new UploadPostImagesController();
 const deletePostImagesController = new DeletePostImagesController();
+const notificatePostController = new NotificatePostController();
 
 const upload = multer(uploadConfig);
 
@@ -46,6 +48,12 @@ postsRoutes.post(
   ensureAuthenticated,
   upload.array('images'),
   uploadPostImagesController.handle
+);
+
+postsRoutes.post(
+  '/send-notification/:id',
+  ensureAuthenticated,
+  notificatePostController.handle
 );
 
 postsRoutes.delete(

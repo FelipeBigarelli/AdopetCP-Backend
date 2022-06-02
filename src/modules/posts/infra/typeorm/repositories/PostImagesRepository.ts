@@ -30,8 +30,6 @@ class PostImagesRepository implements IPostImagesRepository {
   async findById(id: string): Promise<PostImages> {
     const image = await this.repository.findOne(id);
 
-    console.log(image, 'image');
-
     return image;
   }
 
