@@ -30,6 +30,7 @@ class PostMap {
       category_name,
       images,
     });
+
     return post;
   }
 }
