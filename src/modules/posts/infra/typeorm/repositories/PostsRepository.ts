@@ -93,6 +93,14 @@ class PostsRepository implements IPostsRepository {
 
     return post;
   }
+
+  async listByCategory(category_name: string): Promise<Post[]> {
+    const queryBuilder = await this.repository.find({
+      where: { category_name },
+    });
+
+    return queryBuilder;
+  }
 }
 
 export { PostsRepository };

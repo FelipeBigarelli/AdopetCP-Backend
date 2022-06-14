@@ -7,6 +7,7 @@ import { DeleteAdminPostController } from '@modules/posts/useCases/deleteAdminPo
 import { DeletePostImagesController } from '@modules/posts/useCases/deletePostImages/DeletePostImagesController';
 import { EditPostController } from '@modules/posts/useCases/editPost/EditPostController';
 import { ListAllPostsController } from '@modules/posts/useCases/listAllPosts/ListAllPostsController';
+import { ListByCategoryController } from '@modules/posts/useCases/listByCategory/ListByCategoryController';
 import { ListLastPostsController } from '@modules/posts/useCases/listLastPosts/ListLastPostsController';
 import { ListUserPostsController } from '@modules/posts/useCases/listUserPosts/ListUserPostsController';
 import { NotificatePostController } from '@modules/posts/useCases/notificatePost/NotificatePostController';
@@ -23,6 +24,7 @@ const editPostController = new EditPostController();
 const listAllPostsController = new ListAllPostsController();
 const listUserPostsController = new ListUserPostsController();
 const listLastPostsController = new ListLastPostsController();
+const listByCategoryController = new ListByCategoryController();
 const uploadPostImagesController = new UploadPostImagesController();
 const deletePostImagesController = new DeletePostImagesController();
 const notificatePostController = new NotificatePostController();
@@ -37,7 +39,13 @@ postsRoutes.get(
   listUserPostsController.handle
 );
 
-postsRoutes.get('/last', listLastPostsController.handle);
+postsRoutes.get('/last', ensureAuthenticated, listLastPostsController.handle);
+
+postsRoutes.get(
+  '/list-by-category',
+  ensureAuthenticated,
+  listByCategoryController.handle
+);
 
 postsRoutes.put('/edit/:id', ensureAuthenticated, editPostController.handle);
 
