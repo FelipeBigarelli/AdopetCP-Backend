@@ -8,6 +8,7 @@ interface IPostsRepository {
   searchLastPosts(): Promise<Post[]>;
   list(): Promise<Post[]>;
   listUserPosts(user_id: string): Promise<Post[]>;
+  listByCategory(category_name: string): Promise<Post[]>;
 
   delete(id: string, user_id: string): Promise<void>;
   deleteAdmin(id: string): Promise<void>;
