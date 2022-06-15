@@ -1,3 +1,4 @@
+import { instanceToPlain } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -9,12 +10,12 @@ class AuthenticateUserController {
 
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);
 
-    const token = await authenticateUserUseCase.execute({
+    const { user, token } = await authenticateUserUseCase.execute({
       email,
       password,
     });
 
-    return response.json(token);
+    return response.json({ user: instanceToPlain(user), token });
   }
 }
 

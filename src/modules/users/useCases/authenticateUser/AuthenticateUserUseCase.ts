@@ -3,6 +3,7 @@ import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
 import auth from '@config/auth';
+import { User } from '@modules/users/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 import { IUsersTokensRepository } from '@modules/users/repositories/IUsersTokensRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
@@ -14,10 +15,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: {
-    name: string;
-    email: string;
-  };
+  user: User;
   token: string;
   refresh_token: string;
 }
@@ -75,10 +73,7 @@ class AuthenticateUserUseCase {
 
     const tokenReturn: IResponse = {
       token,
-      user: {
-        name: user.name,
-        email: user.email,
-      },
+      user,
       refresh_token,
     };
 
