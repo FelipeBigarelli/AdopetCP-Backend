@@ -6,9 +6,11 @@ import { CreatePostController } from '@modules/posts/useCases/createPost/CreateP
 import { DeleteAdminPostController } from '@modules/posts/useCases/deleteAdminPost/DeleteAdminPostController';
 import { DeletePostImagesController } from '@modules/posts/useCases/deletePostImages/DeletePostImagesController';
 import { EditPostController } from '@modules/posts/useCases/editPost/EditPostController';
+import { FindByLastCreatedController } from '@modules/posts/useCases/findByLastCreated/FindByLastCreatedController';
 import { ListAllPostsController } from '@modules/posts/useCases/listAllPosts/ListAllPostsController';
 import { ListByCategoryController } from '@modules/posts/useCases/listByCategory/ListByCategoryController';
 import { ListLastPostsController } from '@modules/posts/useCases/listLastPosts/ListLastPostsController';
+import { ListPostByIdController } from '@modules/posts/useCases/listPostById/ListPostByIdController';
 import { ListUserPostsController } from '@modules/posts/useCases/listUserPosts/ListUserPostsController';
 import { NotificatePostController } from '@modules/posts/useCases/notificatePost/NotificatePostController';
 import { UploadPostImagesController } from '@modules/posts/useCases/uploadPostImages/UploadPostImagesController';
@@ -19,15 +21,20 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 const postsRoutes = Router();
 
 const createPostController = new CreatePostController();
-const deleteAdminPostController = new DeleteAdminPostController();
 const editPostController = new EditPostController();
+
 const listAllPostsController = new ListAllPostsController();
 const listUserPostsController = new ListUserPostsController();
 const listLastPostsController = new ListLastPostsController();
 const listByCategoryController = new ListByCategoryController();
-const uploadPostImagesController = new UploadPostImagesController();
+const listPostById = new ListPostByIdController();
+const findByLastCreated = new FindByLastCreatedController();
+
+const deleteAdminPostController = new DeleteAdminPostController();
 const deletePostImagesController = new DeletePostImagesController();
+
 const notificatePostController = new NotificatePostController();
+const uploadPostImagesController = new UploadPostImagesController();
 
 const upload = multer(uploadConfig);
 
@@ -47,7 +54,9 @@ postsRoutes.get(
   listByCategoryController.handle
 );
 
-postsRoutes.put('/edit/:id', ensureAuthenticated, editPostController.handle);
+postsRoutes.get('/last-created', ensureAuthenticated, findByLastCreated.handle);
+
+postsRoutes.get('/:id', ensureAuthenticated, listPostById.handle);
 
 postsRoutes.post('/', ensureAuthenticated, createPostController.handle);
 
@@ -63,6 +72,8 @@ postsRoutes.post(
   ensureAuthenticated,
   notificatePostController.handle
 );
+
+postsRoutes.put('/edit/:id', ensureAuthenticated, editPostController.handle);
 
 postsRoutes.delete(
   '/:id',

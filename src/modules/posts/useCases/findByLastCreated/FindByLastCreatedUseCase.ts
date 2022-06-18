@@ -1,21 +1,20 @@
 import { inject, injectable } from 'tsyringe';
 
 import { Post } from '@modules/posts/infra/typeorm/entities/Post';
-import { PostImagesMap } from '@modules/posts/mapper/PostImagesMap';
 import { IPostsRepository } from '@modules/posts/repositories/IPostsRepository';
 
 @injectable()
-class ListLastPostsUseCase {
+class FindByLastCreatedUseCase {
   constructor(
     @inject('PostsRepository')
     private postsRepository: IPostsRepository
   ) {}
 
-  async execute(): Promise<Post[]> {
-    const posts = await this.postsRepository.listLastPosts();
+  async execute(user_id: string): Promise<Post> {
+    const lastPost = await this.postsRepository.findByLastCreated(user_id);
 
-    return posts;
+    return lastPost;
   }
 }
 
-export { ListLastPostsUseCase };
+export { FindByLastCreatedUseCase };

@@ -78,7 +78,7 @@ class PostsRepository implements IPostsRepository {
     await this.repository.save(userPost);
   }
 
-  async searchLastPosts(): Promise<Post[]> {
+  async listLastPosts(): Promise<Post[]> {
     const lastPosts = await this.repository
       .createQueryBuilder('posts')
       .take(10)
@@ -100,6 +100,16 @@ class PostsRepository implements IPostsRepository {
     });
 
     return queryBuilder;
+  }
+
+  async findByLastCreated(user_id: string): Promise<Post> {
+    const lastCreated = await this.repository
+      .createQueryBuilder('posts')
+      .where('posts.user_id = :user_id', { user_id })
+      .orderBy('posts.created_at', 'DESC')
+      .getOne();
+
+    return lastCreated;
   }
 }
 
