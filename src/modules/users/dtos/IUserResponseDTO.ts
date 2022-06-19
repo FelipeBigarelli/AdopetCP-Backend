@@ -3,7 +3,7 @@ interface IUserResponseDTO {
   email: string;
   id: string;
   avatar: string;
-  avatar_url(): string;
+  avatar_url: string;
 }
 
 export { IUserResponseDTO };

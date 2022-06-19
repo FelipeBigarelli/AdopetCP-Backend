@@ -25,6 +25,7 @@ export class alterPostAddCategoriesName1650353565558
         referencedColumnNames: ['category_name'],
         referencedTableName: 'categories',
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       })
     );
   }

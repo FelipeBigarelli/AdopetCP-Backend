@@ -5,7 +5,7 @@ import { IPostResponseDTO } from '../dtos/IPostResponseDTO';
 import { Post } from '../infra/typeorm/entities/Post';
 import { PostImagesMap } from './PostImagesMap';
 
-class PostMap {
+class ArrayPostMap {
   static toDTO({
     id,
     title,
@@ -18,7 +18,7 @@ class PostMap {
     house_number,
     category_name,
     images,
-  }: Post): IPostResponseDTO {
+  }: Post): IPostResponseDTO[] {
     const post = instanceToPlain({
       id,
       title,
@@ -52,4 +52,4 @@ class PostMap {
   }
 }
 
-export { PostMap };
+export { ArrayPostMap };

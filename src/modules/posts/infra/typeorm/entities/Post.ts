@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -45,24 +46,25 @@ class Post {
   house_number: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @Column()
-  user_id: string;
+  user_id?: string;
 
   @Column()
   category_name: string;
 
   @OneToMany(() => PostImages, (postImages) => postImages.post, { eager: true })
+  @Expose({ name: 'image_url' })
   images: PostImages[];
 
   @OneToOne(() => Category)
   @JoinColumn({ name: 'category_name' })
-  category: Category;
+  category?: Category;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user?: User;
 
   constructor() {
     if (!this.id) {

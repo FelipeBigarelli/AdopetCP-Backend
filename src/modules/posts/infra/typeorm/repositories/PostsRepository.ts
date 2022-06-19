@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreatePostDTO } from '@modules/posts/dtos/ICreatePostDTO';
+import { PostMap } from '@modules/posts/mapper/PostMap';
 import { IPostsRepository } from '@modules/posts/repositories/IPostsRepository';
 
 import { Post } from '../entities/Post';
@@ -62,6 +63,10 @@ class PostsRepository implements IPostsRepository {
 
   async listUserPosts(user_id: string): Promise<Post[]> {
     const userPosts = await this.repository.find({ where: { user_id } });
+
+    userPosts.forEach((post) => {
+      PostMap.toDTO(post);
+    });
 
     return userPosts;
   }
