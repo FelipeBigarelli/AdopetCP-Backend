@@ -46,8 +46,6 @@ class PostMap {
       });
     });
 
-    console.log(post, 'asdasd');
-
     return post;
   }
 }

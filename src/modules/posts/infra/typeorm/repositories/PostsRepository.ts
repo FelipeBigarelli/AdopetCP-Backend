@@ -44,9 +44,11 @@ class PostsRepository implements IPostsRepository {
   }
 
   async list(): Promise<Post[]> {
-    const posts = await this.repository.find();
+    const posts = await this.repository.find({ order: { created_at: 'DESC' } });
 
-    return posts;
+    const postMap = posts.map((post) => PostMap.toDTO(post));
+
+    return postMap;
   }
 
   async deleteAdmin(id: string): Promise<void> {
@@ -64,11 +66,9 @@ class PostsRepository implements IPostsRepository {
   async listUserPosts(user_id: string): Promise<Post[]> {
     const userPosts = await this.repository.find({ where: { user_id } });
 
-    userPosts.forEach((post) => {
-      PostMap.toDTO(post);
-    });
+    const userPostMap = userPosts.map((post) => PostMap.toDTO(post));
 
-    return userPosts;
+    return userPostMap;
   }
 
   async editPost(data: ICreatePostDTO): Promise<void> {

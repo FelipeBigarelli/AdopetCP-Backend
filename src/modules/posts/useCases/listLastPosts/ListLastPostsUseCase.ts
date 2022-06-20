@@ -1,7 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
 import { Post } from '@modules/posts/infra/typeorm/entities/Post';
-import { PostImagesMap } from '@modules/posts/mapper/PostImagesMap';
 import { IPostsRepository } from '@modules/posts/repositories/IPostsRepository';
 
 @injectable()

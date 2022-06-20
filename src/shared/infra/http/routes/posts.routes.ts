@@ -83,7 +83,7 @@ postsRoutes.delete(
 );
 
 postsRoutes.delete(
-  '/:post_id/:id',
+  '/:post_id/images/:id',
   ensureAuthenticated,
   deletePostImagesController.handle
 );
