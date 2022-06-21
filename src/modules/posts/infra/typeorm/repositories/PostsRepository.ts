@@ -84,13 +84,16 @@ class PostsRepository implements IPostsRepository {
   }
 
   async listLastPosts(): Promise<Post[]> {
-    const lastPosts = await this.repository
-      .createQueryBuilder('posts')
-      .take(10)
-      .orderBy('posts.created_at', 'DESC')
-      .getMany();
+    const lastPosts = await this.repository.find({
+      order: {
+        created_at: 'DESC',
+      },
+      take: 10,
+    });
 
-    return lastPosts;
+    const lastPostMap = lastPosts.map((post) => PostMap.toDTO(post));
+
+    return lastPostMap;
   }
 
   async findById(id: string): Promise<Post> {
