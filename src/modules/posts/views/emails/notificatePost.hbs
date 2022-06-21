@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        width: 800px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      img {
+        height: 160px;
+      }
+
+      span {
+        margin: 10px 0;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img src="https://api-adopet.s3.sa-east-1.amazonaws.com/avatar/6ce6dbad3f38befc36422340bf205137-logo.png"/>
+      <span>Denuncia recebida da postagem de id: {{id}}</span>
+
+      <br/>
+
+      <span>Informações da postagem:</span>
+      <div>
+        <span>Id: {{id}}</span>
+        <span>Título: {{title}}</span>
+        <span>Descrição: {{description}}</span>
+        <span>Id do Usuário: {{user_id}}</span>
+      </div>
+
+      <h3>Equipe | <strong>AdopetCP</strong></h3>
+    </div>
+  </body>
+
+</html>
+
+

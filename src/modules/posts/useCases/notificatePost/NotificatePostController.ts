@@ -5,13 +5,13 @@ import { NotificatePostUseCase } from './NotificatePostUseCase';
 
 class NotificatePostController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id } = request.body;
 
     const notificatePostUseCase = container.resolve(NotificatePostUseCase);
 
-    notificatePostUseCase.execute(id);
+    const returnPost = await notificatePostUseCase.execute(id);
 
-    return response.json(id);
+    return response.json(returnPost);
   }
 }
 
