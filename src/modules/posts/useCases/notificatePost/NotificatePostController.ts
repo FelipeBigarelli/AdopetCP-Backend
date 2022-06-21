@@ -5,7 +5,7 @@ import { NotificatePostUseCase } from './NotificatePostUseCase';
 
 class NotificatePostController {
   async handle(request: Request, response: Response) {
-    const { id } = request.body;
+    const { id } = request.params;
 
     const notificatePostUseCase = container.resolve(NotificatePostUseCase);
 

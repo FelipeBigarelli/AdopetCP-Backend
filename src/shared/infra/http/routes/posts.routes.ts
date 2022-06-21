@@ -68,7 +68,7 @@ postsRoutes.post(
 );
 
 postsRoutes.post(
-  '/send-notification',
+  '/send-notification/:id',
   ensureAuthenticated,
   notificatePostController.handle
 );
