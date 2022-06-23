@@ -42,7 +42,7 @@ class PostImages {
   image_url(): string {
     switch (process.env.disk) {
       case 'local':
-        return `${process.env.APP_API_URL}/photo/${this.image_name}`;
+        return `${process.env.APP_API_URL}photo${this.image_name}`;
       case 's3':
         return `${process.env.AWS_BUCKET_URL}photo/${this.image_name}`;
       default:
