@@ -26,7 +26,7 @@ jobs:
     
     # Copiar pasta dist para dentro da Digital Ocean
     - name: Copy dist to Digital Ocean
-      uses: appleboy/scp-action@v0.1.4
+      uses: appleboy/scp-action@209e8c05e0492f6ed6fe8a22dfcaefb083c4cf35
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
