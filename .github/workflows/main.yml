@@ -36,5 +36,32 @@ jobs:
         target: "~/app/AdopetCP-Backend"
 
     # Executar "yarn" na Digital Ocean
+    - name: Install dependencies on Digital Ocean
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_KEY }}
+        script: cd ~/app/AdopetCP-Backend && yarn
+
     # Executar as migrations
+    - name: Run migrations on Digital Ocean
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_KEY }}
+        script: cd ~/app/AdopetCP-Backend && ./node_modules/.bin/typeorm migration:run
+
     # Restart no servidor Node.js
+    - name: Run migrations on Digital Ocean
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_KEY }}
+        script: pm2 restart adopet-api
+    
