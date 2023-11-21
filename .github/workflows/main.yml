@@ -26,14 +26,14 @@ jobs:
     
     # Copiar pasta dist para dentro da Digital Ocean
     - name: Copy dist to Digital Ocean
-      uses: appleboy/scp-action@209e8c05e0492f6ed6fe8a22dfcaefb083c4cf35
+      uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         port: ${{ secrets.SSH_PORT }}
         key: ${{ secrets.SSH_KEY }}
         source: "dist"
-        target: "~/"
+        target: "test"
 
     # Substituir o código da pasta dist pelo novo código
     # Executar "yarn" na Digital Ocean
